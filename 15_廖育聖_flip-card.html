@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Flip card</title>
+</head>
+<style>
+    body {
+        margin: 50px;
+    }
+
+    .container {
+        /*perspective:1000px;*/
+        /*perspective:1000px;*/
+        max-width: 1220px;
+        height: 600px;
+        margin: 0px auto;
+        border: 3px solid #aaa;
+        background: black;
+    }
+
+    .box img {
+        width: 300px;
+    }
+
+    .card {
+        position: relative;
+        transform-style: preserve-3d;
+        float: left;
+        margin: 0 20px 20px;
+        width: 200px;
+        height: 280px;
+        /*height:400px;*/
+    }
+
+    .card.active {
+        transform: rotateY(180deg);
+        -webkit-transform: rotateY(180deg);
+    }
+
+    .card.bingo {
+        transform: rotateY(180deg);
+        -webkit-transform: rotateY(180deg);
+    }
+
+    .card img {
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: block;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .front {
+        padding: 10px;
+        transform: rotateY(180deg);
+        -webkit-transform: rotateY(180deg);
+    }
+
+    .back {
+        padding: 10px;
+    }
+
+    .transition {
+        transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+    }
+
+    .box:hover {
+        padding: 10px;
+        transform: rotateY(180deg);
+        -webkit-transform: rotateY(180deg);
+    }
+
+    .re-wrap {
+        padding: 30px 60px;
+    }
+
+    .re {
+        width: 30%;
+        margin: auto;
+        text-align: center;
+        font-size: 28px;
+        border-radius: 5px;
+        padding: 0px 15px;
+        box-sizing: border-box;
+        overflow: hidden;
+        font-family: "Noto Sans TC", sans-serif;
+    }
+
+    /* 計數 */
+    #tiktok {
+        width: 424px;
+        height: 20px;
+        background: red;
+        border: 2px solid darkgreen;
+        margin: 10px auto;
+    }
+
+    #counter {
+        width: 100%;
+        height: 100%;
+        background: white;
+        float: right;
+    }
+
+    /* 文字區塊 */
+    .mask2 {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 99;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .intro1 {
+        width: 400px;
+        height: 400px;
+        background: rgba(255, 255, 255, 0.9);
+        white-space: pre-line;
+        margin: 100px auto 0px auto;
+        font-weight: bolder;
+        font-size: 20px;
+        line-height: 40px;
+        font-family: "微軟正黑體";
+        padding: 20px;
+    }
+
+    .intro1 button {
+        font-size: 20px;
+        display: block;
+        margin: 70px auto 0 auto;
+        padding: 10px;
+    }
+
+    #wall {
+        width: 400px;
+        height: 480px;
+        position: absolute;
+        left: 50px;
+        top: 50px;
+        display: none;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div id="position"></div>
+        <div class="card transition">
+            <div class="card_wrap">
+                <img class="back" src="images/card.jpg" />
+                <img class="front" src="images/pic1.jpg" alt="" />
+            </div>
+        </div>
+        <div class="card transition">
+            <div class="card_wrap">
+                <img class="back" src="images/card.jpg" />
+                <img class="front" src="images/pic2.jpg" alt="" />
+            </div>
+        </div>
+        <div class="card transition">
+            <div class="card_wrap">
+                <img class="back" src="images/card.jpg" />
+                <img class="front" src="images/pic1.jpg" alt="" />
+            </div>
+        </div>
+        <div class="card transition">
+            <div class="card_wrap">
+                <img class="back" src="images/card.jpg" />
+                <img class="front" src="images/pic2.jpg" alt="" />
+            </div>
+        </div>
+        <div class="card transition">
+            <div class="card_wrap">
+                <img class="back" src="images/card.jpg" />
+                <img class="front" src="images/pic3.jpg" alt="" />
+            </div>
+        </div>
+        <div class="card transition">
+            <div class="card_wrap">
+                <img class="back" src="images/card.jpg" />
+                <img class="front" src="images/pic4.jpg" alt="" />
+            </div>
+        </div>
+        <div class="card transition">
+            <div class="card_wrap">
+                <img class="back" src="images/card.jpg" />
+                <img class="front" src="images/pic5.jpg" alt="" />
+            </div>
+        </div>
+        <div class="card transition">
+            <div class="card_wrap">
+                <img class="back" src="images/card.jpg" />
+                <img class="front" src="images/pic3.jpg" alt="" />
+            </div>
+        </div>
+        <div class="card transition">
+            <div class="card_wrap">
+                <img class="back" src="images/card.jpg" />
+                <img class="front" src="images/pic4.jpg" alt="" />
+            </div>
+        </div>
+        <div class="card transition">
+            <div class="card_wrap">
+                <img class="back" src="images/card.jpg" />
+                <img class="front" src="images/pic5.jpg" alt="" />
+            </div>
+        </div>
+        <div class="re-wrap">
+            <div class="re">
+                <p></p>
+            </div>
+        </div>
+        <div id="tiktok">
+            <div id="counter"></div>
+        </div>
+        <div class="mask2">
+            <div class="intro1">
+                遊戲方式：
+                1.翻牌後記住牌面制服及位置
+                2.連續翻出兩張同制服的牌就可以消除
+                3.在時間內消除所有的牌即完成遊戲
+                4.遊戲時間為30秒
+                <button onclick="startGame()">開始遊戲</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.js"
+        integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script>
+        let counterWidth = 100; //計時條長度
+        let timer = 30000; //倒數時間(亳秒)
+        let counterHandle; //計時條
+        let cardLength = $(".card").length; //洗牌
+        let card1 = "1"; //開牌
+        let card2 = "2"; //開牌
+        let con = $(".bingo").removeClass("active").length;
+
+        function startGame() {
+            //屏障提示
+            $(".mask2").eq(0).css("display", "none");
+            //設定卡牌的資料內及顯示圖片
+            for (i = 0; i < cardLength; i++) {
+                let random = Math.floor(Math.random() * cardLength);
+                $(".card").eq(random).appendTo("#position");
+            }
+            //開牌
+            setTimeout(function () {
+                $(".card").addClass("active").css("opacity", "1");
+            }, 100);
+            setTimeout(removeCard, 2000);
+
+            //點擊
+            $(".card").click(function () {
+                $(this).toggleClass("active");
+                //判斷
+                if ($(".active").length % 2 == 1) {
+                    card1 = $(this).find("img.front").attr("src");
+                    //console.log("card1: " + card1);
+                } else {
+                    card2 = $(this).find("img.front").attr("src");
+                    //console.log("card2: " + card2);
+                    setTimeout(removeCard, 450);
+                }
+            });
+        }
+        //相同則隱藏
+        function removeCard() {
+            if (card1 == card2 || $(".bingo").length % 2 == 1) {
+                $(".active").addClass("bingo").css("opacity", "0.5");
+                $(".card").removeClass("active");
+                //移除快速點擊導致的bug
+                if ($(".bingo").length % 2 == 1) {
+                    $(".card").removeClass("bingo");
+                }
+                return false
+            } else {
+                $(".card").removeClass("active");
+            }
+            counterHandle = setInterval(timeCounter, 125); //啟動計時器
+        }
+
+        //計時條倒數函式
+        function timeCounter() {
+            let con = $(".bingo").removeClass("active").length;
+            //時間歸零 或 翻玩牌則
+            if (timer < 0 || con == 10) {
+                $("#counter").css("width", "0%");
+                clearInterval(counterHandle);
+                resetCard(); //計時結束時執行結果判定函式
+                //跳出屏障
+                $(".mask2").eq(0).css("display", "block");
+            } else {
+                timer -= 125;
+                counterWidth -= 0.41;
+                document.getElementById("counter").style.width =
+                    counterWidth + "%";
+                //console.log(timer);
+            }
+        }
+        function resetCard() {
+            let con = $(".bingo").removeClass("active").length;
+            let str = "";
+            //設定結果字串
+            if (con >= 10) {
+                str =
+                    "遊戲結果\n恭喜完成遊戲\n<button onclick='timeout()'>點擊稍後重新開始</button> ";
+            } else {
+                str =
+                    "遊戲結果\n失敗，還有 " +
+                    (10 - con) +
+                    " 張未完成\n<button onclick='timeout()'>點擊稍後重新開始</button>";
+            }
+            //把結果字串寫入提示顯示區
+            //把結果字串寫入提示顯示區
+            $('.intro1').eq(0).html(str);
+            $('.mask2').eq(0).css("display", "block");
+            //console.log(str);
+        }
+
+        function timeout() {
+            let timer = 0
+            if (timer <= 0) { location.assign(location) };
+        }
+    </script>
+</body>
+
+</html>
